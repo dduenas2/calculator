@@ -1,0 +1,389 @@
+/* ============================================
+   RESET Y VARIABLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores principales */
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #f093fb;
+    
+    /* Colores de fondo */
+    --bg-main: #0f0f1e;
+    --bg-calculator: #1a1a2e;
+    --bg-display: #16213e;
+    --bg-button: #2a2a3e;
+    
+    /* Colores de texto */
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0b8;
+    
+    /* Colores de botones */
+    --btn-number: #2a2a3e;
+    --btn-operator: #667eea;
+    --btn-function: #4a4a5e;
+    --btn-equals: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    /* Sombras */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.dev-info {
+    background: var(--bg-calculator);
+    padding: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.back-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--primary-color);
+}
+
+.dev-info h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dev-info p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   CALCULADORA PRINCIPAL
+   ============================================ */
+
+.calculator-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.calculator {
+    background: var(--bg-calculator);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Display */
+.display-container {
+    background: var(--bg-display);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.previous-operand {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    min-height: 1.5rem;
+    text-align: right;
+    margin-bottom: 0.5rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.current-operand {
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: right;
+    word-break: break-all;
+    font-family: 'Orbitron', monospace;
+}
+
+/* Grid de botones */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+/* Botones */
+.btn {
+    background: var(--btn-number);
+    border: none;
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    font-family: 'Orbitron', monospace;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Tipos de botones */
+.btn-operator {
+    background: var(--btn-operator);
+}
+
+.btn-function {
+    background: var(--btn-function);
+}
+
+.btn-equals {
+    background: var(--btn-equals);
+    font-size: 2rem;
+}
+
+.btn-zero {
+    grid-column: span 2;
+}
+
+/* ============================================
+   PANEL DE HISTORIAL
+   ============================================ */
+
+.history-panel {
+    background: var(--bg-calculator);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 350px;
+    max-height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--bg-button);
+}
+
+.history-header h3 {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+}
+
+.btn-clear-history {
+    background: var(--btn-function);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-clear-history:hover {
+    background: #dc2626;
+}
+
+.history-list {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.history-item {
+    background: var(--bg-button);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    animation: slideIn 0.3s ease;
+}
+
+.history-item:hover {
+    background: var(--bg-display);
+    transform: translateX(5px);
+}
+
+.history-operation {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.history-result {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0.3rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.empty-history {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+    background: var(--bg-calculator);
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-sm);
+}
+
+.footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: var(--accent-color);
+}
+
+.keyboard-hint {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0.7;
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .calculator-container {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+    
+    .history-panel {
+        max-width: 100%;
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dev-info h1 {
+        font-size: 1.5rem;
+    }
+    
+    .calculator {
+        padding: 1rem;
+    }
+    
+    .current-operand {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 1.2rem;
+        font-size: 1.3rem;
+    }
+    
+    .buttons-grid {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calculator-container {
+        padding: 1rem;
+    }
+    
+    .current-operand {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+}
